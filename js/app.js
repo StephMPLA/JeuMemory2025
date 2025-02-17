@@ -1,4 +1,3 @@
-// Jeu Memory
 let index = 0;
 let jeu = document.getElementById('jeu');
 let nbCarte = 6;
@@ -33,16 +32,19 @@ const imageContainer = document.getElementById("imageContainer");
 loadButton.addEventListener('click', () => {
     const selectedTheme = select.value;
 
+    //Si aucun thème selectionné
     if (!themes[selectedTheme]) {
         alert("Veuillez choisir un thème valide.");
         return;
     }
 
+    //Récupère le chemin et le nombre de carte dans chaque thème
     const [path, count] = themes[selectedTheme];
     tableau = [];
     newtableau = [];
     jeu.innerHTML = '';
 
+    //Création du jeu
     for (let i = 1; i <= count; i++) {
         for (let j = 0; j < 2; j++) {
             let carte = document.createElement("div");
@@ -84,26 +86,27 @@ loadButton.addEventListener('click', () => {
 
             newtableau.push({ carte, carteInner, faceReelle, id: i });
 
+            //Ajout evenement sur chaque carte
             carte.addEventListener('click', () => {
                 if (tableauClick.length < 2 && !tableauClick.includes(carte)) {
                     nombreDeClic++;
                     nbclic.textContent = nombreDeClic.toString();
                     tableauClick.push(carte);
                     carteInner.style.transform = "rotateY(180deg)";
-    
+
                     if (tableauClick.length === 2) {
                         setTimeout(() => {
                             let [carte1, carte2] = tableauClick;
                             let src1 = carte1.querySelector('.face-reelle').src;
                             let src2 = carte2.querySelector('.face-reelle').src;
-    
+
                             if (src1 === src2) {
                                 NbCarteTrouver += 2;
-    
+
                                 // Désactiver les cartes trouvées
-                                carte1.removeEventListener('click', () => {});
-                                carte2.removeEventListener('click', () => {});
-    
+                                carte1.removeEventListener('click', () => { });
+                                carte2.removeEventListener('click', () => { });
+
                                 // Vérifier si toutes les cartes ont été trouvées
                                 if (NbCarteTrouver === count * 2) {
                                     jeu.style.display = "none";
@@ -117,7 +120,7 @@ loadButton.addEventListener('click', () => {
                                     nbclic.style.fontSize = "28px";
                                     nbclic.style.marginBottom = "5vh";
                                     nbclic.textContent = `Vous avez gagné en ${nombreDeClic * .5} coups`;
-                                    addScoreLocal(nombreDeClic *.5);
+                                    addScoreLocal(nombreDeClic * .5);
                                 }
                             } else {
                                 tableauClick.forEach(carte => {
@@ -135,7 +138,10 @@ loadButton.addEventListener('click', () => {
         }
     }
 
+    //Mélangeur de cartes
     newtableau.sort(() => Math.random() - 0.5);
+
+    //Ajout des cartes dans le jeu
     newtableau.forEach(obj => {
         jeu.appendChild(obj.carte);
     });
@@ -153,30 +159,27 @@ function displayImages(images) {
     });
 }
 
-function addScoreLocal(nombreDeClic)
-{
-let currentUser = localStorage.getItem('user');
+//Ajout du score dans le localStorage
+function addScoreLocal(nombreDeClic) {
+    let currentUser = localStorage.getItem('user');
 
-if(currentUser)
-{
-    let user = JSON.parse(currentUser);
+    //Si l'utrilisateur est connecté
+    if (currentUser) {
+        let user = JSON.parse(currentUser);
 
-    //Création d'un tableau de score s'il n'existe pas
-    if(!user.scores)
-    {
-        user.scores = [];
+        //Création d'un tableau de score s'il n'existe pas
+        if (!user.scores) {
+            user.scores = [];
+        }
+
+        //Ajout du nouveau score
+        user.scores.push({
+            date: new Date().toLocaleDateString('fr-FR'),
+            theme: select.value,
+            score: nombreDeClic
+        })
+
+        //Mise à jour du localStorage
+        localStorage.setItem('user', JSON.stringify(user))
     }
-
-    //Ajout du nouveau score
-    user.scores.push({
-        date: new Date().toLocaleDateString('fr-FR'),
-        theme: select.value,
-        score: nombreDeClic
-    })
-
-    //Mise à jour du localStorage
-    localStorage.setItem('user', JSON.stringify(user))
-
-    console.log(user.score)
-}
 }
