@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="fr">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="css/style.css">
+    <title>Document</title>
+</head>
+
+<body>
+    <header>
+        <!-- Logo aligné à gauche -->
+        <a href="index.html" id="logo">Jeu Memory</a>
+
+        <!-- Liens alignés à droite -->
+        <nav>
+            <ul class="nav-links">
+                <li><a href="inscrire.html">S'inscrire</a></li>
+                <li><a href="connexion.html">Se connecter</a></li>
+                <li><a href="profil.html">profil</a></li>
+                <li><a href="jouer.html">Jouer</a></li>
+            </ul>
+        </nav>
+    </header>
+    <div id="chooseUser">
+        <label for="select">Choisissez un thème:</label>
+
+        <select name="select" id="select">
+            <option value="">--Choisir un thème--</option>
+            <option value="Alphabet">Alphabet</option>
+            <option value="Animaux">Animaux</option>
+            <option value="AnimauxAnimes">Animaux de dessins animés</option>
+            <option value="AnimauxDomestiques">Animauix domestiques</option>
+            <option value="Chiens">Chiens</option>
+            <option value="Dinosaures">Dinosaures</option>
+            <option value="DinosauresWithName">Dinosaures avec nom</option>
+            <option value="Legumes">Légumes</option>
+        </select>
+    </div>
+    <button id="loadImages">Charger les images</button>
+
+    <div id="jeu"></div>
+    <div id="text-victory">
+    </div>
+    <span></span>
+   
+
+    <!-- Footer fixé en bas -->
+    <footer>
+        &copy; 2024 Jeu Memory. Tous droits réservés.
+    </footer>
+
+    <script src="js/app.js" defer></script>
+</body>
+
+</html>

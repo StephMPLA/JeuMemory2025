@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Jeu Memory</title>
+    <link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+    <header>
+        <!-- Logo aligné à gauche -->
+        <a href="index.html" id="logo">Jeu Memory</a>
+
+        <!-- Liens alignés à droite -->
+        <nav>
+            <ul class="nav-links">
+                <li><a href="inscrire.html">S'inscrire</a></li>
+                <li><a href="connexion.html">Se connecter</a></li>
+                <li><a href="profil.html">Profil</a></li>
+                <li><a href="jouer.html">Jouer</a></li>
+            </ul>
+        </nav>
+    </header>
+
+     <!-- Contenu principal -->
+     <main>
+        <div id="inscription">
+            <h1>Inscription</h1>
+            <form id="formInscription" action="inscription" method="post">
+                <!-- Nom d'utilisateur -->
+                <label for="username">Nom d'utilisateur</label>
+                <input type="text" id="username" name="username" placeholder="3 caractères minimum" required minlength="3">
+        
+                <!-- Email -->
+                <label for="email">Entrez votre email</label>
+                <input type="email" id="email" name="email" placeholder="Votre email" required>
+        
+                <!-- Mot de passe -->
+                <label for="password">Mot de passe</label>
+                <input type="password" id="password" name="password" placeholder="Votre mot de passe" required>
+                <p>Au moins 6 caractères, un chiffre et un symbole.</p>
+        
+                <!-- Confirmation mot de passe -->
+                <label for="confirmPassword">Confirmez le mot de passe</label>
+                <input type="password" id="confirmPassword" name="confirmPassword" placeholder="Confirmez le mot de passe" required>
+        
+                <!-- Boutons -->
+                <button type="submit">Créer un compte</button>
+                <button type="reset">Annuler</button>
+            </form>
+        </div>
+        <!-- Zone d'affichage des données stockées -->
+
+    </main>
+
+    <!-- Footer fixé en bas -->
+    <footer>
+        &copy; 2024 Jeu Memory. Tous droits réservés.
+    </footer>
+    <script src="js/inscription.js" defer></script>
+</body>
+</html>
