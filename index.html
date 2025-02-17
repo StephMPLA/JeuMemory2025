@@ -8,7 +8,7 @@
     <meta name="description" content="">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <link rel="stylesheet" href="css/style.css">
-  
+
 </head>
 
 <body>
@@ -50,8 +50,7 @@
             </div>
             <div id="text-align-gauche">
                 <p>Si vous voulez vous souvenir de votre score, inscrivez-vous via le formulaire.<br>
-                    Le jeu garde les <strong>5 meilleurs</strong> scores.</br>
-                    Si vous voulez relancer une partie cliquez sur <strong>la barre d'espace</strong>.
+                    Le jeu garde les scores.</br>
                 </p>
             </div>
         </div>
@@ -59,8 +58,10 @@
 
     <!-- Footer fixé en bas -->
     <footer>
-        &copy; 2025 Jeu Memory par Stéphane Mougeot. Tous droits réservés.
+        &copy; <span id="current-year"></span> Jeu Memory par Stéphane Mougeot. Tous droits réservés.
     </footer>
+    
+    <script src="js/date.js" defer></script>
     <script src="js/burger.js" defer></script>
 </body>
 

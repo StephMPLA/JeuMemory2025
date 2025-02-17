@@ -30,6 +30,9 @@ const imageContainer = document.getElementById("imageContainer");
 
 // Événement de chargement des cartes
 loadButton.addEventListener('click', () => {
+
+        jeu.style.display = 'grid'; // Utilise 'grid' ou un autre display approprié
+
     const selectedTheme = select.value;
 
     //Si aucun thème selectionné

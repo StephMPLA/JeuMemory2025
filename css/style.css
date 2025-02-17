@@ -61,6 +61,9 @@ header {
 
 /* Section des règles du jeu */
 #regledujeu {
+    display: flex;
+    justify-content: start;
+    flex-direction: column;
     margin: 5vh auto;
     width: 90%;
     max-width: 600px;
@@ -232,10 +235,49 @@ footer {
     user-select: none;
     z-index: 1001;
 }
+#text-align-gauche {
+    margin-left: 5px; /* Ajuste cette valeur pour avoir un léger espace à gauche */
+    margin-bottom: 5px;
+    display: flex;
+    justify-content: flex-start; /* Assure que tout est aligné à gauche */
+    flex-direction: column;
+    text-align: left; /* Assure que le texte est aligné à gauche */
+}
+
+#text-align-gauche p, #text-align-gauche ul {
+    margin-left: 0; /* Annule les marges par défaut si nécessaires */
+}
+
+#text-align-gauche img {
+    margin-left: 0; /* Ajuste les images si nécessaire */
+}
 
 #chooseUser{
     margin: auto;
+    font-size: 20px;
 }
+
+#select{
+    font-size: 20px; 
+}
+h1{
+    color: #d2691e;
+}
+#loadImages {
+    width: 200px; /* Largeur du bouton */
+    height: 60px; /* Hauteur du bouton (ajuste si nécessaire) */
+    margin: 0 auto; /* Centre le bouton horizontalement */
+    display: block; /* Assure que le bouton est un élément de type block */
+    text-align: center; /* Centre le texte à l'intérieur du bouton */
+    line-height: 40px; /* Aligne le texte verticalement (utilise la hauteur du bouton) */
+    border-radius: 5px;
+    cursor: pointer;
+}
+
+#jeu {
+    display: none; /* Cacher la div par défaut */
+}
+
 /* ===================== MEDIA QUERIES ===================== */
 
 /* Ordinateurs (1200px et plus) */
