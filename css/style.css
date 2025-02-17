@@ -64,7 +64,7 @@ header {
     display: flex;
     justify-content: start;
     flex-direction: column;
-    margin: 5vh auto;
+    margin: 10% auto;
     width: 90%;
     max-width: 600px;
     background-color: #FFEFD6;
@@ -99,7 +99,7 @@ header {
 
 /* Formulaires d'inscription/connexion */
 #inscription, #profil {
-    margin: 15vh auto;
+    margin: 10% auto;
     width: 90%;
     max-width: 500px;
     background-color: #fff;
