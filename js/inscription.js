@@ -52,20 +52,20 @@ form.addEventListener('submit', (e) => {
 });
 
 // Affiche les données enregistrées
-function displayData() {
-    const storedUser = localStorage.getItem('user');
-    if (storedUser) {
-        const user = JSON.parse(storedUser);
-        displayDiv.innerHTML = `
-            <h3>🗂️ Données enregistrées :</h3>
-            <p><strong>👤 Nom d'utilisateur :</strong> ${user.username}</p>
-            <p><strong>📧 Email :</strong> ${user.email}</p>
-            <p><strong>🔒 Mot de passe :</strong> ${user.password}</p>
-        `;
-    } else {
-        displayDiv.textContent = 'Aucune donnée enregistrée.';
-    }
-}
+// function displayData() {
+//     const storedUser = localStorage.getItem('user');
+//     if (storedUser) {
+//         const user = JSON.parse(storedUser);
+//         displayDiv.innerHTML = `
+//             <h3>🗂️ Données enregistrées :</h3>
+//             <p><strong>👤 Nom d'utilisateur :</strong> ${user.username}</p>
+//             <p><strong>📧 Email :</strong> ${user.email}</p>
+//             <p><strong>🔒 Mot de passe :</strong> ${user.password}</p>
+//         `;
+//     } else {
+//         displayDiv.textContent = 'Aucune donnée enregistrée.';
+//     }
+// }
 
 // Affichage au chargement de la page
-window.addEventListener('DOMContentLoaded', displayData);
+// window.addEventListener('DOMContentLoaded', displayData);

@@ -34,27 +34,35 @@
             <option value="">--Choisir un thème--</option>
             <option value="Alphabet">Alphabet</option>
             <option value="Animaux">Animaux</option>
-            <option value="AnimauxAnimes">Animaux de dessins animés</option>
+            <option value="Animes">Animaux de dessins animés</option>
             <option value="AnimauxDomestiques">Animauix domestiques</option>
             <option value="Chiens">Chiens</option>
             <option value="Dinosaures">Dinosaures</option>
             <option value="DinosauresWithName">Dinosaures avec nom</option>
             <option value="Legumes">Légumes</option>
         </select>
+
+        <label for="grid-size">Choisissez la taille de la grille:</label>
+        <select id="grid-size">
+            <option value="2x3">2 x 3</option>
+            <option value="3x3">3 x 3</option>
+            <option value="2x4">2 x 4</option>
+            <!-- La taille maximale sera ajoutée dynamiquement par JavaScript -->
+        </select>
+
+        <button id="loadImages">Charger les images</button>
     </div>
-    <button id="loadImages">Charger les images</button>
 
     <div id="jeu"></div>
     <div id="text-victory">
     </div>
     <span></span>
 
-
     <!-- Footer fixé en bas -->
     <footer>
         &copy; <span id="current-year"></span> Jeu Memory par Stéphane Mougeot. Tous droits réservés.
     </footer>
-    
+
     <script src="js/date.js" defer></script>
     <script src="js/app.js" defer></script>
 </body>

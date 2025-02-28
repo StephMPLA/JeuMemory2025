@@ -1,6 +1,5 @@
 let index = 0;
 let jeu = document.getElementById('jeu');
-let nbCarte = 6;
 let newtableau = [];
 let tableauClick = [];
 let nombreDeClic = 0;
@@ -10,6 +9,8 @@ let NbCarteTrouver = 0;
 let DivVictory = document.getElementById("text-victory");
 DivVictory.style.display = "none";
 let tableau = [];
+let choose = document.getElementById("chooseUser");
+const gridSizeSelect = document.getElementById("grid-size");
 
 // Thèmes disponibles
 const themes = {
@@ -23,56 +24,70 @@ const themes = {
     Legumes: ["img/memory-legume", 6]
 };
 
-// Éléments interactifs
-const select = document.getElementById("select");
-const loadButton = document.getElementById("loadImages");
-const imageContainer = document.getElementById("imageContainer");
+// Options de taille de grille
+const gridSizesDesktop = ["2x3", "3x3", "2x4", "3x4", "4x4", "4x5", "4x6", "5x6", "6x6", "6x7", "6x8"];
+const gridSizesMobile = ["2x3", "3x3", "2x4", "3x4", "4x4"];
 
-// Événement de chargement des cartes
-loadButton.addEventListener('click', () => {
+// Fonction pour ajuster la taille de la grille selon l'écran
+function adjustGridSizeOptions() {
+    gridSizeSelect.innerHTML = "";
+    let sizes = window.innerWidth < 768 ? gridSizesMobile : gridSizesDesktop;
+    
+    sizes.forEach(size => {
+        let option = document.createElement("option");
+        option.value = size;
+        option.textContent = size;
+        gridSizeSelect.appendChild(option);
+    });
+}
 
-        jeu.style.display = 'grid'; // Utilise 'grid' ou un autre display approprié
+// Appliquer la bonne liste de tailles au chargement et au redimensionnement
+window.addEventListener('load', adjustGridSizeOptions);
+window.addEventListener('resize', adjustGridSizeOptions);
 
-    const selectedTheme = select.value;
+// Chargement des cartes
+document.getElementById('loadImages').addEventListener('click', () => {
+    DivVictory.style.display = "none";
+    nbclic.style.display = "none";
+    nombreDeClic = 0;
+    NbCarteTrouver = 0;
+    tableauClick = [];
+    jeu.innerHTML = '';
 
-    //Si aucun thème selectionné
+    const selectedTheme = document.getElementById("select").value;
+    const [rows, cols] = gridSizeSelect.value.split('x').map(Number);
+
     if (!themes[selectedTheme]) {
         alert("Veuillez choisir un thème valide.");
         return;
     }
 
-    //Récupère le chemin et le nombre de carte dans chaque thème
-    const [path, count] = themes[selectedTheme];
-    tableau = [];
-    newtableau = [];
-    jeu.innerHTML = '';
+    const [path, maxImages] = themes[selectedTheme];
+    let nbCartesSelectionnees = Math.min(Math.floor((rows * cols) / 2), maxImages);
 
-    //Création du jeu
-    for (let i = 1; i <= count; i++) {
+    if (nbCartesSelectionnees * 2 > maxImages * 2) {
+        alert("Pas assez d'images pour cette grille.");
+        return;
+    }
+
+    let imagesDisponibles = Array.from({ length: maxImages }, (_, i) => i + 1);
+    imagesDisponibles.sort(() => Math.random() - 0.5);
+    imagesDisponibles = imagesDisponibles.slice(0, nbCartesSelectionnees);
+
+    jeu.style.display = 'grid';
+    jeu.style.gridTemplateColumns = `repeat(${cols}, 1fr)`;
+    jeu.style.gridTemplateRows = `repeat(${rows}, 1fr)`;
+    jeu.style.gap = "10px";
+
+    newtableau = [];
+    tableau = [];
+
+    imagesDisponibles.forEach(num => {
         for (let j = 0; j < 2; j++) {
             let carte = document.createElement("div");
             carte.className = "carte";
-            carte.style.width = "100px";
-            carte.style.height = "100px";
             carte.style.perspective = "1000px";
-            carte.style.display = "inline-block";
-            carte.style.margin = "10px";
-
-            let faceCachee = document.createElement("img");
-            faceCachee.src = "img/question.svg";
-            faceCachee.className = "face-cachee";
-            faceCachee.style.width = "100%";
-            faceCachee.style.position = "absolute";
-            faceCachee.style.backfaceVisibility = "hidden";
-
-            let faceReelle = document.createElement("img");
-            faceReelle.src = `${path}/${i}.webp`;
-            tableau.push(faceReelle.src);
-            faceReelle.className = "face-reelle";
-            faceReelle.style.width = "100%";
-            faceReelle.style.transform = "rotateY(180deg)";
-            faceReelle.style.position = "absolute";
-            faceReelle.style.backfaceVisibility = "hidden";
+            carte.style.cursor = "pointer";
 
             let carteInner = document.createElement("div");
             carteInner.className = "carte-inner";
@@ -82,14 +97,28 @@ loadButton.addEventListener('click', () => {
             carteInner.style.transformStyle = "preserve-3d";
             carteInner.style.transition = "transform 0.5s";
 
+            let faceCachee = document.createElement("img");
+            faceCachee.src = "img/question.svg";
+            faceCachee.className = "face-cachee";
+            faceCachee.style.width = "100%";
+            faceCachee.style.position = "absolute";
+            faceCachee.style.backfaceVisibility = "hidden";
+
+            let faceReelle = document.createElement("img");
+            faceReelle.src = `${path}/${num}.webp`;
+            faceReelle.className = "face-reelle";
+            faceReelle.style.width = "100%";
+            faceReelle.style.transform = "rotateY(180deg)";
+            faceReelle.style.position = "absolute";
+            faceReelle.style.backfaceVisibility = "hidden";
+
             carteInner.appendChild(faceCachee);
             carteInner.appendChild(faceReelle);
             carte.appendChild(carteInner);
             jeu.appendChild(carte);
 
-            newtableau.push({ carte, carteInner, faceReelle, id: i });
+            newtableau.push({ carte, carteInner, faceReelle, id: num });
 
-            //Ajout evenement sur chaque carte
             carte.addEventListener('click', () => {
                 if (tableauClick.length < 2 && !tableauClick.includes(carte)) {
                     nombreDeClic++;
@@ -100,36 +129,26 @@ loadButton.addEventListener('click', () => {
                     if (tableauClick.length === 2) {
                         setTimeout(() => {
                             let [carte1, carte2] = tableauClick;
-                            let src1 = carte1.querySelector('.face-reelle').src;
-                            let src2 = carte2.querySelector('.face-reelle').src;
+                            let id1 = carte1.querySelector('.face-reelle').src;
+                            let id2 = carte2.querySelector('.face-reelle').src;
 
-                            if (src1 === src2) {
+                            if (id1 === id2) {
                                 NbCarteTrouver += 2;
+                                carte1.style.pointerEvents = "none";
+                                carte2.style.pointerEvents = "none";
 
-                                // Désactiver les cartes trouvées
-                                carte1.removeEventListener('click', () => { });
-                                carte2.removeEventListener('click', () => { });
-
-                                // Vérifier si toutes les cartes ont été trouvées
-                                if (NbCarteTrouver === count * 2) {
+                                if (NbCarteTrouver === nbCartesSelectionnees * 2) {
                                     jeu.style.display = "none";
                                     DivVictory.style.display = "block";
-                                    DivVictory.style.fontSize = "28px";
-                                    DivVictory.style.marginTop = "5vh";
-                                    DivVictory.style.marginBottom = "5vh";
-                                    DivVictory.style.textAlign = "center";
                                     DivVictory.textContent = "🎉 GAGNÉ ! 🎯";
                                     nbclic.style.display = "block";
-                                    nbclic.style.fontSize = "28px";
-                                    nbclic.style.marginBottom = "5vh";
-                                    nbclic.textContent = `Vous avez gagné en ${nombreDeClic * .5} coups`;
-                                    addScoreLocal(nombreDeClic * .5);
+                                    nbclic.textContent = `Vous avez gagné en ${nombreDeClic} coups`;
+                                    addScoreLocal(nombreDeClic);
                                 }
                             } else {
                                 tableauClick.forEach(carte => {
-                                    let inner = carte.querySelector(".carte-inner");
                                     setTimeout(() => {
-                                        inner.style.transform = "rotateY(0deg)";
+                                        carte.querySelector(".carte-inner").style.transform = "rotateY(0deg)";
                                     }, 500);
                                 });
                             }
@@ -139,50 +158,40 @@ loadButton.addEventListener('click', () => {
                 }
             });
         }
-    }
-
-    //Mélangeur de cartes
-    newtableau.sort(() => Math.random() - 0.5);
-
-    //Ajout des cartes dans le jeu
-    newtableau.forEach(obj => {
-        jeu.appendChild(obj.carte);
     });
+
+    newtableau.sort(() => Math.random() - 0.5);
+    newtableau.forEach(obj => jeu.appendChild(obj.carte));
+
+    adjustGameContainer();
 });
 
-function displayImages(images) {
-    imageContainer.innerHTML = '';
-    images.forEach(imgSrc => {
-        const img = document.createElement('img');
-        img.src = imgSrc;
-        img.alt = `Image ${imgSrc}`;
-        img.style.width = '100px';
-        img.style.margin = '5px';
-        imageContainer.appendChild(img);
-    });
+// Ajuste la taille du conteneur et des cartes sur mobile
+function adjustGameContainer() {
+    jeu.style.width = "fit-content";
+    jeu.style.maxWidth = "90vw";
+    jeu.style.margin = "auto";
+
+    if (window.innerWidth < 768) {
+        document.querySelectorAll(".carte").forEach(carte => {
+            carte.style.width = "15vw";
+            carte.style.height = "15vw";
+            carte.style.margin = "3px";
+        });
+    }
 }
 
-//Ajout du score dans le localStorage
+// Ajoute le score dans le localStorage
 function addScoreLocal(nombreDeClic) {
     let currentUser = localStorage.getItem('user');
-
-    //Si l'utrilisateur est connecté
     if (currentUser) {
         let user = JSON.parse(currentUser);
-
-        //Création d'un tableau de score s'il n'existe pas
-        if (!user.scores) {
-            user.scores = [];
-        }
-
-        //Ajout du nouveau score
+        if (!user.scores) user.scores = [];
         user.scores.push({
             date: new Date().toLocaleDateString('fr-FR'),
-            theme: select.value,
+            theme: document.getElementById("select").value,
             score: nombreDeClic
-        })
-
-        //Mise à jour du localStorage
-        localStorage.setItem('user', JSON.stringify(user))
+        });
+        localStorage.setItem('user', JSON.stringify(user));
     }
 }

@@ -159,21 +159,23 @@ button[type="reset"]:hover {
     background-color: #999;
 }
 
+
 /* Grille de jeu */
+/* ✅ Ajustement global du conteneur du jeu */
 #jeu {
     display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(100px, 1fr)); /* Utilisation de grid avec un minimum de 100px */
-    gap: 15px;
-    justify-items: center; /* Centrer les cartes horizontalement */
-    align-items: center; /* Centrer les cartes verticalement */
-    margin: auto; /* Centrer le conteneur de jeu */
+    justify-content: center;
+    align-items: center;
+    margin: auto;
     padding: 20px;
-    width: 90%;
-    max-width: 600px; /* Limite la largeur pour les grands écrans */
+    width: fit-content;
+    max-width: 90vw;
     background-color: #FFEFD6;
     border: 2px solid #582D1D;
     border-radius: 15px;
+    overflow: hidden;
 }
+
 
 #jeu .carte {
     background-color: #ecdec8;
@@ -182,6 +184,9 @@ button[type="reset"]:hover {
     border: 2px solid #582D1D;
     transition: transform 0.5s;
     cursor: pointer;
+    width: 100px;
+    height: 100px;
+    margin: 5px;
 }
 
 /* Footer */
@@ -253,7 +258,13 @@ footer {
 }
 
 #chooseUser{
+    display: flex;
+    flex-direction: column;
     margin: auto;
+    font-size: 20px;
+}
+
+#grid-size{
     font-size: 20px;
 }
 
@@ -267,6 +278,7 @@ h1{
     width: 200px; /* Largeur du bouton */
     height: 60px; /* Hauteur du bouton (ajuste si nécessaire) */
     margin: 0 auto; /* Centre le bouton horizontalement */
+    margin-top: 5%;
     display: block; /* Assure que le bouton est un élément de type block */
     text-align: center; /* Centre le texte à l'intérieur du bouton */
     line-height: 40px; /* Aligne le texte verticalement (utilise la hauteur du bouton) */
@@ -373,9 +385,14 @@ h1{
     }
 
     #jeu {
-        margin: 0;
-        margin: auto;
-        grid-template-columns: repeat(auto-fit, minmax(90px, 1fr));
+        max-width: 100%;
+        padding: 5px;
+    }
+
+    #jeu .carte {
+        width: 15vw;  /* Les cartes deviennent plus petites */
+        height: 15vw;
+        margin: 3px;
     }
 
     #logo {
@@ -393,7 +410,10 @@ h1{
         margin: auto;
         grid-template-columns: repeat(auto-fit, minmax(90px, 1fr));
     }
-
+    #jeu .carte {
+        width: 18vw;
+        height: 18vw;
+    }
     #regledujeu, #inscription, #profil {
         width: 100%;
         padding: 20px;
