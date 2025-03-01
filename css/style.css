@@ -285,11 +285,25 @@ h1{
     border-radius: 5px;
     cursor: pointer;
 }
-
+#historique{
+    margin-top: 1vh;
+}
 #jeu {
     display: none; /* Cacher la div par défaut */
 }
-
+#tableScores {
+    margin-top: 1vh;
+    width: 100%;
+    border-collapse: collapse; /* Fusionner les bordures pour un vrai tableau */
+    text-align: center;
+}
+#tableScores th, #tableScores td {
+    border: 1px solid black; /* Ajouter une bordure pour toutes les cellules */
+    padding: 8px; /* Espacer un peu le contenu */
+}
+#tableScores th {
+    background-color: #f2f2f2; /* Ajouter une couleur de fond aux en-têtes */
+}
 /* ===================== MEDIA QUERIES ===================== */
 
 /* Ordinateurs (1200px et plus) */
@@ -401,6 +415,16 @@ h1{
 
     .nav-links a {
         font-size: 1rem;
+    }
+
+    #text-victory{
+        font-size: 24px;
+    }
+    #chooseUser>label{
+        text-align: center;
+    }
+    #tableScores{
+        width: 100%;
     }
 }
 

@@ -19,15 +19,13 @@ function display() {
             <p><strong>📧 Email :</strong> ${user.email}</p>
             <p><strong>🔒 Mot de passe :</strong> ${user.password}</p>
             <div class="separate"></div>
-            <h3>🗂️ Historique des scores :</h3>
+            <h3 id="historique">🗂️ Historique des scores :</h3>
 
             `;
 
             if (user.scores && user.scores.length > 0) {
                 let table = document.createElement("table");
-                table.border = "1";
-                table.style.width = "800px";
-                table.style.textAlign = "center";
+                table.id = "tableScores"
             
                 //Création de l'en-tête du tableau
                 let thead = document.createElement("thead");
@@ -35,6 +33,7 @@ function display() {
                     <tr>
                      <th>📅 Date</th>
                         <th>🎭 Thème</th>
+                        <th>    Taille</th>
                         <th>🎯 Score</th>
                     </tr>`;
                     table.appendChild(thead);
@@ -48,6 +47,7 @@ function display() {
                         tr.innerHTML = `
                             <td>${score.date}</td>
                             <td>${score.theme}</td>
+                            <td>${score.taille}</td>
                             <td>${score.score}</td>
                         `;
                         tbody.appendChild(tr);

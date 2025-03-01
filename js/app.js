@@ -140,8 +140,10 @@ document.getElementById('loadImages').addEventListener('click', () => {
                                 if (NbCarteTrouver === nbCartesSelectionnees * 2) {
                                     jeu.style.display = "none";
                                     DivVictory.style.display = "block";
+                                    DivVictory.style.textAlign ="center";
                                     DivVictory.textContent = "🎉 GAGNÉ ! 🎯";
                                     nbclic.style.display = "block";
+                                    nbclic.style.textAlign = "center";
                                     nbclic.textContent = `Vous avez gagné en ${nombreDeClic} coups`;
                                     addScoreLocal(nombreDeClic);
                                 }
@@ -190,6 +192,7 @@ function addScoreLocal(nombreDeClic) {
         user.scores.push({
             date: new Date().toLocaleDateString('fr-FR'),
             theme: document.getElementById("select").value,
+            taille : document.getElementById("grid-size").value,
             score: nombreDeClic
         });
         localStorage.setItem('user', JSON.stringify(user));
