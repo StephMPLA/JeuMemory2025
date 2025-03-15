@@ -1,11 +1,9 @@
-/* Réinitialisation et style de base */
 * {
     margin: 0;
     padding: 0;
     box-sizing: border-box;
     font-family: 'Georgia', serif;
 }
-
 body {
     min-height: 100vh;
     background-color: #FFF7ED;
@@ -13,8 +11,6 @@ body {
     display: flex;
     flex-direction: column;
 }
-
-/* Header */
 header {
     display: flex;
     flex-wrap: wrap;
@@ -25,7 +21,6 @@ header {
     border-bottom: 2px solid #582D1D;
     box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
 }
-
 #logo {
     font-size: 2rem;
     font-weight: bold;
@@ -33,18 +28,20 @@ header {
     color: #582D1D;
     transition: color 0.3s;
 }
-
 #logo:hover {
     color: #F59E0B;
 }
-
-/* Liens dans le menu */
 .nav-links {
     display: flex;
+    align-items: center; 
+    justify-content: flex-end;
     list-style: none;
     gap: 25px;
 }
-
+.nav-links li {
+    display: flex;
+    align-items: center;
+}
 .nav-links a {
     text-decoration: none;
     color: #582D1D;
@@ -52,14 +49,15 @@ header {
     transition: color 0.3s, background-color 0.3s;
     padding: 10px 15px;
     border-radius: 5px;
+    display: inline-block; 
+    line-height: normal; 
 }
-
-.nav-links a:hover {
-    color: #1C1917;
-    background-color: #F59E0B;
+.nav-links .inscrire,
+.nav-links .connecter {
+    display: flex;
+    align-items: center;
+    padding: 10px 15px;
 }
-
-/* Section des règles du jeu */
 #regledujeu {
     display: flex;
     justify-content: start;
@@ -73,31 +71,25 @@ header {
     padding: 30px;
     text-align: center;
 }
-
 #regledujeu h2 {
     margin-bottom: 20px;
     color: #d2691e;
     text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.3);
 }
-
 #regledujeu p {
     margin: 15px 0;
     font-size: 1.1rem;
     text-align: justify;
 }
-
 #imageregles {
     margin-top: 20px;
     text-align: center;
 }
-
 #imageregles img {
     max-width: 100%;
     height: auto;
     border-radius: 10px;
 }
-
-/* Formulaires d'inscription/connexion */
 #inscription, #profil {
     margin: 10% auto;
     width: 90%;
@@ -109,18 +101,15 @@ header {
     padding: 25px;
     text-align: center;
 }
-
 form {
     display: flex;
     flex-direction: column;
     text-align: left;
 }
-
 label {
     margin-top: 15px;
     font-weight: bold;
 }
-
 input {
     margin-top: 5px;
     padding: 12px;
@@ -128,12 +117,10 @@ input {
     border-radius: 8px;
     font-size: 1rem;
 }
-
 input:focus {
     border-color: #d2691e;
     box-shadow: 0 0 5px rgba(210, 105, 30, 0.7);
 }
-
 button {
     margin-top: 20px;
     padding: 12px 20px;
@@ -145,23 +132,16 @@ button {
     font-size: 1rem;
     transition: background-color 0.3s;
 }
-
 button:hover {
     background-color: #a0522d;
 }
-
 button[type="reset"] {
     background-color: #ccc;
     color: #333;
 }
-
 button[type="reset"]:hover {
     background-color: #999;
 }
-
-
-/* Grille de jeu */
-/* ✅ Ajustement global du conteneur du jeu */
 #jeu {
     display: grid;
     justify-content: center;
@@ -175,8 +155,6 @@ button[type="reset"]:hover {
     border-radius: 15px;
     overflow: hidden;
 }
-
-
 #jeu .carte {
     background-color: #ecdec8;
     aspect-ratio: 1 / 1;
@@ -188,8 +166,6 @@ button[type="reset"]:hover {
     height: 100px;
     margin: 5px;
 }
-
-/* Footer */
 footer {
     margin-top: auto;
     text-align: center;
@@ -197,10 +173,6 @@ footer {
     background-color: #FFEFD6;
     border-top: 2px solid #582D1D;
 }
-
-/* Mobile and Tablet adjustments */
-
-/* Menu mobile : caché par défaut sur petit écran */
 .nav-links.mobile {
     display: none;
     position: fixed;
@@ -216,12 +188,9 @@ footer {
     border-radius: 0 0 0 10px;
     animation: slideIn 0.5s ease;
 }
-
 .nav-links.active {
     display: flex;
 }
-
-/* Animation du menu mobile */
 @keyframes slideIn {
     from {
         transform: translateX(100%);
@@ -230,8 +199,6 @@ footer {
         transform: translateX(0);
     }
 }
-
-/* Icône burger : cachée sur PC, affichée sur tablette et mobile */
 .burger-menu {
     display: none;
     font-size: 2rem;
@@ -241,33 +208,28 @@ footer {
     z-index: 1001;
 }
 #text-align-gauche {
-    margin-left: 5px; /* Ajuste cette valeur pour avoir un léger espace à gauche */
+    margin-left: 5px;
     margin-bottom: 5px;
     display: flex;
-    justify-content: flex-start; /* Assure que tout est aligné à gauche */
+    justify-content: flex-start;
     flex-direction: column;
-    text-align: left; /* Assure que le texte est aligné à gauche */
+    text-align: left;
 }
-
 #text-align-gauche p, #text-align-gauche ul {
-    margin-left: 0; /* Annule les marges par défaut si nécessaires */
+    margin-left: 0;
 }
-
 #text-align-gauche img {
-    margin-left: 0; /* Ajuste les images si nécessaire */
+    margin-left: 0;
 }
-
 #chooseUser{
     display: flex;
     flex-direction: column;
     margin: auto;
     font-size: 20px;
 }
-
 #grid-size{
     font-size: 20px;
 }
-
 #select{
     font-size: 20px; 
 }
@@ -275,13 +237,13 @@ h1{
     color: #d2691e;
 }
 #loadImages {
-    width: 200px; /* Largeur du bouton */
-    height: 60px; /* Hauteur du bouton (ajuste si nécessaire) */
-    margin: 0 auto; /* Centre le bouton horizontalement */
+    width: 200px;
+    height: 60px;
+    margin: 0 auto;
     margin-top: 5%;
-    display: block; /* Assure que le bouton est un élément de type block */
-    text-align: center; /* Centre le texte à l'intérieur du bouton */
-    line-height: 40px; /* Aligne le texte verticalement (utilise la hauteur du bouton) */
+    display: block;
+    text-align: center;
+    line-height: 40px;
     border-radius: 5px;
     cursor: pointer;
 }
@@ -289,134 +251,101 @@ h1{
     margin-top: 1vh;
 }
 #jeu {
-    display: none; /* Cacher la div par défaut */
+    display: none;
 }
 #tableScores {
     margin-top: 1vh;
     width: 100%;
-    border-collapse: collapse; /* Fusionner les bordures pour un vrai tableau */
+    border-collapse: collapse;
     text-align: center;
 }
 #tableScores th, #tableScores td {
-    border: 1px solid black; /* Ajouter une bordure pour toutes les cellules */
-    padding: 8px; /* Espacer un peu le contenu */
+    border: 1px solid black;
+    padding: 8px;
 }
 #tableScores th {
-    background-color: #f2f2f2; /* Ajouter une couleur de fond aux en-têtes */
+    background-color: #f2f2f2;
 }
-/* ===================== MEDIA QUERIES ===================== */
-
-/* Ordinateurs (1200px et plus) */
 @media screen and (min-width: 1200px) {
     body {
         font-size: 18px;
     }
-
     #regledujeu, #inscription, #profil {
         width: 40%;
     }
-
     #jeu {
         grid-template-columns: repeat(auto-fit, minmax(100px, 1fr));
     }
-
     .nav-links {
         gap: 30px;
     }
-
     .nav-links a {
         font-size: 1.2rem;
     }
-
-    /* Icône burger masquée sur PC */
     .burger-menu {
         display: none;
     }
 }
-
-/* Tablettes (entre 768px et 1199px) */
 @media screen and (max-width: 1199px) and (min-width: 768px) {
     body {
         font-size: 16px;
     }
-
     #regledujeu, #inscription, #profil {
         width: 60%;
     }
-
     #jeu {
         grid-template-columns: repeat(auto-fit, minmax(100px, 1fr));
     }
-
     #logo {
         font-size: 1.5rem;
     }
-
-    /* Burger affiché sur tablette */
     .burger-menu {
         display: none;
     }
-
     .nav-links {
-        display: flex; /* Liens visibles en tablette */
+        display: flex;
     }
-
     .nav-links.mobile {
         display: none;
     }
 }
-
-/* Mobiles (en dessous de 768px) */
 @media screen and (max-width: 768px) {
-    /* Le burger devient visible */
     .burger-menu {
         display: block;
     }
-
-    /* Les liens de navigation sont masqués */
     .nav-links {
         display: none;
     }
-
-    /* Quand le menu devient actif, il s'affiche */
     .nav-links.active {
         display: flex;
     }
-
     header {
         flex-direction: column;
         gap: 15px;
         text-align: center;
     }
-
     .nav-links {
         flex-direction: column;
         gap: 15px;
     }
-
     #regledujeu, #inscription, #profil {
         width: 90%;
     }
-
     #jeu {
         max-width: 100%;
         padding: 5px;
     }
-
     #jeu .carte {
-        width: 15vw;  /* Les cartes deviennent plus petites */
+        width: 15vw;
         height: 15vw;
         margin: 3px;
     }
-
     #logo {
         font-size: 1.5rem;
     }
-
     .nav-links a {
         font-size: 1rem;
     }
-
     #text-victory{
         font-size: 24px;
     }
@@ -427,7 +356,6 @@ h1{
         width: 100%;
     }
 }
-
 @media screen and (max-width: 480px) {
     #jeu {
         margin: 0;
@@ -442,11 +370,9 @@ h1{
         width: 100%;
         padding: 20px;
     }
-
     #logo {
         font-size: 1.2rem;
     }
-
     .nav-links a {
         font-size: 0.9rem;
     }

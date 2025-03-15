@@ -184,17 +184,51 @@ function adjustGameContainer() {
 }
 
 // Ajoute le score dans le localStorage
+// function addScoreLocal(nombreDeClic) {
+//     let currentUser = localStorage.getItem('users');
+//     if (currentUser) {
+//         let user = JSON.parse(currentUser);
+//         if (!user.scores) user.scores = [];
+//         user.scores.push({
+//             date: new Date().toLocaleDateString('fr-FR'),
+//             theme: document.getElementById("select").value,
+//             taille : document.getElementById("grid-size").value,
+//             score: nombreDeClic
+//         });
+//         localStorage.setItem('user', JSON.stringify(user));
+//     }
+// }
+// Ajoute le score dans le localStorage pour l'utilisateur connecté
 function addScoreLocal(nombreDeClic) {
-    let currentUser = localStorage.getItem('user');
-    if (currentUser) {
-        let user = JSON.parse(currentUser);
-        if (!user.scores) user.scores = [];
-        user.scores.push({
-            date: new Date().toLocaleDateString('fr-FR'),
-            theme: document.getElementById("select").value,
-            taille : document.getElementById("grid-size").value,
-            score: nombreDeClic
-        });
-        localStorage.setItem('user', JSON.stringify(user));
+    let currentUserData = localStorage.getItem('currentUser');
+
+    if (!currentUserData) {
+        console.warn("⚠ Aucun utilisateur connecté. Score non enregistré.");
+        return;
     }
+
+    let user = JSON.parse(currentUserData);
+
+    // Vérifier si l'utilisateur a déjà un tableau de scores
+    if (!user.scores) {
+        user.scores = [];
+    }
+
+    // Ajouter la nouvelle partie au tableau des scores
+    user.scores.push({
+        date: new Date().toLocaleDateString('fr-FR'),
+        theme: document.getElementById("select").value,
+        taille: document.getElementById("grid-size").value,
+        score: nombreDeClic
+    });
+
+    // Mettre à jour `currentUser` dans `localStorage`
+    localStorage.setItem("currentUser", JSON.stringify(user));
+
+    // 🔹 Mettre à jour `users` (liste globale des utilisateurs)
+    let users = JSON.parse(localStorage.getItem("users")) || [];
+    users = users.map(u => (u.email === user.email ? user : u)); // Mise à jour de l'utilisateur
+    localStorage.setItem("users", JSON.stringify(users));
+
+    console.log("✅ Score ajouté :", user.scores[user.scores.length - 1]);
 }
